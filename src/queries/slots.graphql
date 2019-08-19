@@ -1,0 +1,10 @@
+query Slots {
+  slots {
+    id
+    name
+    coordinate
+    liquidId
+    shotVolume
+    description
+  }
+}

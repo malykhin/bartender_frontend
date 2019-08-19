@@ -1,0 +1,10 @@
+query Slot($slotId: ID!) {
+  slot(id: $slotId) {
+    id
+    name
+    coordinate
+    liquidId
+    shotVolume
+    description
+  }
+}
