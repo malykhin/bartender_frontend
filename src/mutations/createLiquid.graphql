@@ -1,0 +1,7 @@
+mutation CreateLiquid($name: String!, $description: String!) {
+  createLiquid(name: $name, description: $description) {
+    id
+    name
+    description
+  }
+}

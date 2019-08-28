@@ -1,0 +1,5 @@
+mutation DeleteLiquid($id: ID!) {
+  deleteLiquid(id: $id) {
+    id
+  }
+}

@@ -1,13 +1,13 @@
 import React from 'react'
-import { InputGroup, FormGroup } from '@blueprintjs/core'
+import { InputGroup, FormGroup, Classes } from '@blueprintjs/core'
 import { string, object, func, bool } from 'prop-types'
 
 import './styles.css'
 
-export const TextInput = ({ placeholder, name, form, onChange, inline }) => {
+export const TextInput = ({ placeholder, name, form, onChange, inline, isLoading }) => {
   const handleChange = (e) => onChange({ ...form, [name]: e.target.value })
   return (
-    <FormGroup label={placeholder} inline={inline}>
+    <FormGroup className={isLoading && Classes.SKELETON} label={placeholder} inline={inline}>
       <InputGroup placeholder={placeholder} value={form[name] || ''} onChange={handleChange} />
     </FormGroup>
   )
@@ -15,6 +15,7 @@ export const TextInput = ({ placeholder, name, form, onChange, inline }) => {
 
 TextInput.defaultProps = {
   inline: false,
+  isLoading: false,
 }
 
 TextInput.propTypes = {
@@ -23,4 +24,5 @@ TextInput.propTypes = {
   form: object.isRequired,
   onChange: func.isRequired,
   inline: bool,
+  isLoading: bool,
 }
