@@ -1,0 +1,20 @@
+.card {
+  margin: 12px;
+  padding: 12px;
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttons_wrapper {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 68px;
+}
+
+.buttons_wrapper > button {
+  margin-left: 8px;
+}

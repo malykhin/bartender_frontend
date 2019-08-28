@@ -14,12 +14,14 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@blueprintjs/core": "^3.18.0",
+    "@blueprintjs/select": "^3.10.0",
     "@hot-loader/react-dom": "^16.9.0",
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
     "apollo-link-http": "^1.5.15",
     "classnames": "^2.2.6",
     "graphql": "^14.4.2",
+    "lodash": "^4.17.15",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1"
@@ -30,6 +32,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
+    "babel-plugin-react-css-modules": "^5.2.6",
     "css-loader": "^3.2.0",
     "dotenv-webpack": "^1.7.0",
     "eslint": "^6.1.0",

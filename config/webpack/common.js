@@ -18,15 +18,22 @@ module.exports = {
         },
       },
       {
-        test: /\.html$/,
+        test: /\.css$/,
+        exclude: /node_modules/,
         use: [
+          { loader: 'style-loader' },
           {
-            loader: 'html-loader',
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
+              },
+            },
           },
         ],
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         include: /node_modules\/@blueprintjs/,
         use: ['style-loader', 'css-loader'],
       },

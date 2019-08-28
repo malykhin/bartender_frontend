@@ -1,0 +1,12 @@
+.save_button {
+  align-self: flex-end;
+}
+
+.delete_button {
+  margin-right: 8px;
+}
+
+.wide {
+  width: 181px;
+  justify-content: space-between;
+}

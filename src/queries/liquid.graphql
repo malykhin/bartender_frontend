@@ -1,0 +1,7 @@
+query Liquid($liquidId: ID!) {
+  liquid(id: $liquidId) {
+    id
+    name
+    description
+  }
+}

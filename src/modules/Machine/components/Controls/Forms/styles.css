@@ -1,0 +1,30 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.narrow_wrapper {
+  width: 220px;
+}
+
+.controls_container {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header {
+  align-self: center;
+}
+
+.center {
+  align-self: center;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
