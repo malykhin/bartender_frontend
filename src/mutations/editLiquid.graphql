@@ -1,0 +1,7 @@
+mutation EditLiquid($id: ID!, $name: String!, $description: String!) {
+  editLiquid(id: $id, name: $name, description: $description) {
+    id
+    name
+    description
+  }
+}

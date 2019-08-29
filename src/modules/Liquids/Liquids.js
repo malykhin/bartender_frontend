@@ -9,6 +9,7 @@ import './Liquids.css'
 import LIQUIDS_QUERY from '../../queries/liquids.graphql'
 
 import CREATE_LIQUID_MUTATION from '../../mutations/createLiquid.graphql'
+import EDIT_LIQUID_MUTATION from '../../mutations/editLiquid.graphql'
 import DELETE_LIQUID_MUTATION from '../../mutations/deleteLiquid.graphql'
 
 const Liquids = () => {
@@ -18,11 +19,14 @@ const Liquids = () => {
   const [createLiquid, { loading: createLoading }] = useMutation(CREATE_LIQUID_MUTATION, {
     refetchQueries: [{ query: LIQUIDS_QUERY }],
   })
+  const [editLiquid, { loading: editLoading }] = useMutation(EDIT_LIQUID_MUTATION, {
+    refetchQueries: [{ query: LIQUIDS_QUERY }],
+  })
   const [deleteLiquid, { loading: deleteLoading }] = useMutation(DELETE_LIQUID_MUTATION, {
     refetchQueries: [{ query: LIQUIDS_QUERY }],
   })
 
-  const isLoading = loading || createLoading || deleteLoading
+  const isLoading = loading || createLoading || editLoading || deleteLoading
   return (
     <div styleName="container">
       {liquids.map((liquid) => (
@@ -31,7 +35,7 @@ const Liquids = () => {
           liquid={liquid}
           isLoading={isLoading}
           handleDelete={() => deleteLiquid({ variables: { id: liquid.id } })}
-          handleEdit={() => {}}
+          handleEdit={editLiquid}
         />
       ))}
       <LiquidCard isLoading={isLoading} handleCreate={createLiquid} isCreate />
