@@ -1,0 +1,6 @@
+query LiquidsForSelect {
+  liquids {
+    id
+    name
+  }
+}

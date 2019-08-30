@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { FormGroup, H3 } from '@blueprintjs/core'
 
-import { SaveButton } from '../../../../../components/formPrimitives/SaveButton'
-import { NumInput } from '../../../../../components/formPrimitives/NumInput'
+import { SaveButton } from 'components/formPrimitives/SaveButton'
+import { NumInput } from 'components/formPrimitives/NumInput'
 
 import styles from './styles.css'
 

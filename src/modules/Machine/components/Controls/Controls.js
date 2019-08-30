@@ -1,5 +1,5 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { object, array, func } from 'prop-types'
 
 import { controlTypes } from '../../constants'
 
@@ -22,11 +22,13 @@ const formMap = {
   [controlTypes.SLOTS]: Slots,
 }
 
-export const Controls = ({ control: { type } }) => {
+export const Controls = ({ control: { type, id }, liquids, setDefaultView }) => {
   const Form = formMap[type] || Default
-  return <Form />
+  return <Form liquids={liquids} id={id} setDefaultView={setDefaultView} />
 }
 
 Controls.propTypes = {
   control: object.isRequired,
+  liquids: array.isRequired,
+  setDefaultView: func.isRequired,
 }

@@ -1,0 +1,16 @@
+mutation CreateSlot($name: String!, $description: String!, $coordinate: Int!, $liquidId: ID!, $shotVolume: Int!) {
+  createSlot(
+    name: $name
+    description: $description
+    coordinate: $coordinate
+    liquidId: $liquidId
+    shotVolume: $shotVolume
+  ) {
+    id
+    name
+    description
+    coordinate
+    liquidId
+    shotVolume
+  }
+}

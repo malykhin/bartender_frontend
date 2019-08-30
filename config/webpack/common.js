@@ -1,3 +1,4 @@
+const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
@@ -6,6 +7,9 @@ module.exports = {
   resolve: {
     alias: {
       'react-dom': '@hot-loader/react-dom',
+      queries: path.resolve(__dirname, '../../src/queries/'),
+      mutations: path.resolve(__dirname, '../../src/mutations/'),
+      components: path.resolve(__dirname, '../../src/components/'),
     },
   },
   module: {

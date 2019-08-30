@@ -3,7 +3,7 @@ import { object, bool, func } from 'prop-types'
 import cn from 'classnames'
 import { Card, H4, Elevation, Button, Text, Intent, Classes } from '@blueprintjs/core'
 
-import { TextInput } from '../../../../components/formPrimitives/TextInput'
+import { TextInput } from 'components/formPrimitives/TextInput'
 
 import styles from './LiquidCard.css'
 
