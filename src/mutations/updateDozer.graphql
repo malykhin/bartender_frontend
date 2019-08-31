@@ -1,0 +1,8 @@
+mutation UpdateDozer($dozerOn: Int!, $dozerOff: Int!, $dozerIdle: Int!, $dozerCycleDelay: Int!) {
+  editSlot(dozerOn: $dozerOn, dozerOff: $dozerOff, dozerIdle: $dozerIdle, dozerCycleDelay: $dozerCycleDelay) {
+    dozerOn
+    dozerOff
+    dozerIdle
+    dozerCycleDelay
+  }
+}

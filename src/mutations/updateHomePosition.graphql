@@ -1,0 +1,5 @@
+mutation UpdateHomePosition($homePosition: Int!) {
+  editSlot(homePosition: $homePosition) {
+    homePosition
+  }
+}

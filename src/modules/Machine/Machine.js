@@ -51,6 +51,7 @@ const Machine = () => {
             handleSlotsClick={handleSetControls(controlTypes.SLOTS)}
             handleShowTooltip={setTooltip}
             handleHideTooltip={hideTooltip}
+            selectedType={control.type || ''}
           />
           {slots.map((slot, index) => (
             <Bottle
@@ -60,6 +61,7 @@ const Machine = () => {
               handleShowTooltip={setTooltip}
               handleHideTooltip={hideTooltip}
               handleSlotClick={() => handleSetControls(controlTypes.SLOT)(slot.id)}
+              selected={control.type === controlTypes.SLOT && control.id === slot.id}
             />
           ))}
           <Tooltip tooltip={tooltip} />

@@ -1,6 +1,7 @@
 import React from 'react'
 import { NumericInput, FormGroup, Classes } from '@blueprintjs/core'
 import { string, object, func, bool } from 'prop-types'
+import { isFinite } from 'lodash'
 
 import './styles.css'
 
@@ -8,7 +9,11 @@ export const NumInput = ({ placeholder, name, form, onChange, isLoading }) => {
   const handleChange = (value) => onChange({ ...form, [name]: value })
   return (
     <FormGroup className={isLoading && Classes.SKELETON} label={placeholder}>
-      <NumericInput placeholder={placeholder} value={form[name] || ''} onValueChange={handleChange} />
+      <NumericInput
+        placeholder={placeholder}
+        value={isFinite(form[name]) ? form[name] : ''}
+        onValueChange={handleChange}
+      />
     </FormGroup>
   )
 }

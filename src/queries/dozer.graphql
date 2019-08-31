@@ -1,0 +1,8 @@
+query Dozer {
+  machine {
+    dozerOn
+    dozerOff
+    dozerIdle
+    dozerCycleDelay
+  }
+}

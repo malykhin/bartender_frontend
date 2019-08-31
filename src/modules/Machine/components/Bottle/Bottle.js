@@ -1,12 +1,13 @@
 import React from 'react'
-import { number, func, object } from 'prop-types'
+import { number, func, object, bool } from 'prop-types'
+import cn from 'classnames'
 
 import './Bottle.css'
 
 const STEP = 52
 const OFFSET = 684
 
-export const Bottle = ({ index, slot, handleShowTooltip, handleHideTooltip, handleSlotClick }) => {
+export const Bottle = ({ index, slot, handleShowTooltip, handleHideTooltip, handleSlotClick, selected }) => {
   const xBottlePosition = OFFSET - 174 - index * STEP
   return (
     <svg
@@ -30,7 +31,7 @@ export const Bottle = ({ index, slot, handleShowTooltip, handleHideTooltip, hand
     >
       <g>
         <polygon
-          styleName="bottle_shape"
+          styleName={cn('bottle_shape', { selected })}
           points="61.34,3.61 3.61,3.61 3.61,165.24 20.93,165.24 20.93,211.42 44.02,211.42 44.02,165.24 61.34,165.24 "
         />
       </g>
@@ -44,4 +45,5 @@ Bottle.propTypes = {
   handleHideTooltip: func.isRequired,
   handleSlotClick: func.isRequired,
   slot: object.isRequired,
+  selected: bool.isRequired,
 }

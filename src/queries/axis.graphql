@@ -1,0 +1,10 @@
+query Axis {
+  machine {
+    zeroSpeed
+    zeroAccel
+    maxStroke
+    speed
+    accel
+    stepsPerMm
+  }
+}

@@ -1,5 +1,8 @@
 import React from 'react'
-import { func } from 'prop-types'
+import { func, string } from 'prop-types'
+import cn from 'classnames'
+
+import { controlTypes } from '../../constants'
 
 import './MachineSchema.css'
 
@@ -11,6 +14,7 @@ export const MachineSchema = ({
   handleHomePositionClick,
   handleFinalPositionClick,
   handleSlotsClick,
+  selectedType,
 }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +35,7 @@ export const MachineSchema = ({
       <line styleName="fil0 str0" x1="2510.09" y1="3046.04" x2="2510.09" y2="941.99" />
       <line styleName="fil0 str0" x1="2853.43" y1="3046.04" x2="2510.09" y2="3046.04" />
       <polygon
-        styleName="fil0 str0 hoverable"
+        styleName={cn('fil0', 'str0', 'hoverable', { selected: selectedType === controlTypes.HOME_POSITION })}
         points="14873.27,3331.16 14225.55,2934.19 13655.1,2933.56 14237.58,3331.16"
         onMouseEnter={() =>
           handleShowTooltip({
@@ -45,7 +49,7 @@ export const MachineSchema = ({
         onClick={handleHomePositionClick}
       />
       <polygon
-        styleName="fil0 str0 hoverable"
+        styleName={cn('fil0', 'str0', 'hoverable', { selected: selectedType === controlTypes.FINAL_POSITION })}
         points="3623.13,2922.45 3011.31,3336.94 2375.62,3336.94 3057.44,2921.82"
         onMouseEnter={() =>
           handleShowTooltip({
@@ -59,7 +63,7 @@ export const MachineSchema = ({
         onClick={handleFinalPositionClick}
       />
       <rect
-        styleName="fil0 str0 hoverable"
+        styleName={cn('fil0', 'str0', 'hoverable', { selected: selectedType === controlTypes.AXIS })}
         x="47.73"
         y="4487.57"
         width="17204.11"
@@ -76,7 +80,7 @@ export const MachineSchema = ({
         onClick={handleAxisClick}
       />
       <rect
-        styleName="fil0 str0 hoverable"
+        styleName={cn('fil0', 'str0', 'hoverable', { selected: selectedType === controlTypes.SLOTS })}
         x="2510.08"
         y="47.73"
         width="12286.53"
@@ -84,7 +88,7 @@ export const MachineSchema = ({
         onMouseEnter={() =>
           handleShowTooltip({
             isVisible: true,
-            content: 'Slots',
+            content: 'Create slots',
             x: 550,
             y: -34,
           })
@@ -93,7 +97,7 @@ export const MachineSchema = ({
         onClick={handleSlotsClick}
       />
       <polygon
-        styleName="fil0 str0 hoverable"
+        styleName={cn('fil0', 'str0', 'hoverable', { selected: selectedType === controlTypes.DOZER })}
         points="12225.84,3341.42 12358.04,2415.85 11432.49,2415.85 11564.73,3341.42 "
         onMouseEnter={() =>
           handleShowTooltip({
@@ -118,4 +122,5 @@ MachineSchema.propTypes = {
   handleHomePositionClick: func.isRequired,
   handleFinalPositionClick: func.isRequired,
   handleSlotsClick: func.isRequired,
+  selectedType: string.isRequired,
 }

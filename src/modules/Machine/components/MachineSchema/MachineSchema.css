@@ -28,3 +28,7 @@
   fill: #8a9ba8;
   cursor: pointer;
 }
+
+.selected {
+  fill: #2b95d6;
+}
