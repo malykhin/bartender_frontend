@@ -1,0 +1,24 @@
+mutation EditSlot(
+  $id: ID!
+  $name: String!
+  $description: String!
+  $coordinate: Int!
+  $liquidId: ID!
+  $shotVolume: Int!
+) {
+  editSlot(
+    id: $id
+    name: $name
+    description: $description
+    coordinate: $coordinate
+    liquidId: $liquidId
+    shotVolume: $shotVolume
+  ) {
+    id
+    name
+    description
+    coordinate
+    liquidId
+    shotVolume
+  }
+}

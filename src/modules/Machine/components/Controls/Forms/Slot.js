@@ -13,7 +13,9 @@ import { Select } from 'components/formPrimitives/Select'
 
 import styles from './styles.css'
 
+import EDIT_SLOT_MUTATION from 'mutations/editSlot.graphql'
 import DELETE_SLOT_MUTATION from 'mutations/deleteSlot.graphql'
+
 import SLOTS_QUERY from 'queries/slots.graphql'
 import SLOT_QUERY from 'queries/slot.graphql'
 
@@ -32,6 +34,10 @@ export const Slot = ({ liquids, id, setDefaultView }) => {
     setForm(slot)
   }, [data])
 
+  const [editSlot, { loading: editLoading }] = useMutation(EDIT_SLOT_MUTATION, {
+    refetchQueries: [{ query: SLOT_QUERY, variables: { slotId: id } }],
+  })
+
   const [deleteSlot, { loading: deleteLoading }] = useMutation(DELETE_SLOT_MUTATION, {
     refetchQueries: [{ query: SLOTS_QUERY }],
   })
@@ -41,11 +47,11 @@ export const Slot = ({ liquids, id, setDefaultView }) => {
     setDefaultView(null)
   }
 
-  const isLoading = deleteLoading || loading
+  const isLoading = deleteLoading || editLoading || loading
 
   return (
     <div styleName="wrapper">
-      <H3 className={styles.header}>Slot setup</H3>
+      <H3 className={styles.header}>Slot {slot.name && slot.name} setup</H3>
       <div styleName="controls_container">
         <FormGroup>
           <TextInput isLoading={isLoading} form={form} onChange={setForm} placeholder="Name" name="name" />
@@ -85,7 +91,7 @@ export const Slot = ({ liquids, id, setDefaultView }) => {
       </div>
       <div styleName="footer">
         <DeleteButton isLoading={isLoading} onClick={handleSlotDelete} />
-        <SaveButton isLoading={isLoading} onClick={() => console.log(form)} />
+        <SaveButton isLoading={isLoading} onClick={() => editSlot({ variables: form })} />
       </div>
     </div>
   )
