@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "queries/*": ["./src/queries/*"],
+      "mutations/*": ["./src/mutations/*"],
+      "components/*": ["./src/components/*"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

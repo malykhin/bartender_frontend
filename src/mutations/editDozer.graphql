@@ -1,0 +1,8 @@
+mutation EditDozer($dozerOn: Int!, $dozerOff: Int!, $dozerIdle: Int!, $dozerCycleDelay: Int!) {
+  editDozer(dozerOn: $dozerOn, dozerOff: $dozerOff, dozerIdle: $dozerIdle, dozerCycleDelay: $dozerCycleDelay) {
+    dozerOn
+    dozerOff
+    dozerIdle
+    dozerCycleDelay
+  }
+}

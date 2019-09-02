@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
-import { FormGroup, H3 } from '@blueprintjs/core'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { get } from 'lodash'
+import { FormGroup, H3 } from '@blueprintjs/core'
 
 import { SaveButton } from 'components/formPrimitives/SaveButton'
 import { NumInput } from 'components/formPrimitives/NumInput'
@@ -9,6 +9,7 @@ import { NumInput } from 'components/formPrimitives/NumInput'
 import styles from './styles.css'
 
 import AXIS_QUERY from 'queries/axis.graphql'
+import EDIT_AXIS_MUTATION from 'mutations/editAxis.graphql'
 
 export const Axis = () => {
   const [form, setForm] = useState({})
@@ -21,7 +22,11 @@ export const Axis = () => {
     setForm(axis)
   }, [data])
 
-  const isLoading = loading
+  const [editAxis, { loading: editLoading }] = useMutation(EDIT_AXIS_MUTATION, {
+    refetchQueries: [{ query: AXIS_QUERY }],
+  })
+
+  const isLoading = loading || editLoading
 
   return (
     <div styleName="wrapper">
@@ -56,7 +61,7 @@ export const Axis = () => {
           />
         </FormGroup>
       </div>
-      <SaveButton isLoading={isLoading} onClick={() => console.log(form)} />
+      <SaveButton isLoading={isLoading} onClick={() => editAxis({ variables: form })} />
     </div>
   )
 }

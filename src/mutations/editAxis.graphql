@@ -1,12 +1,5 @@
-mutation UpdateAxis(
-  $zeroSpeed: Int!
-  $zeroAccel: Int!
-  $maxStroke: Int!
-  $speed: Int!
-  $accel: Int!
-  $stepsPerMm: Int!
-) {
-  editSlot(
+mutation EditAxis($zeroSpeed: Int!, $zeroAccel: Int!, $maxStroke: Int!, $speed: Int!, $accel: Int!, $stepsPerMm: Int!) {
+  editAxis(
     zeroSpeed: $zeroSpeed
     zeroAccel: $zeroAccel
     maxStroke: $maxStroke

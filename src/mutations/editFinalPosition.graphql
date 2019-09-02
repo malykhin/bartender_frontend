@@ -1,0 +1,5 @@
+mutation EditFinalPosition($finalPosition: Int!) {
+  editFinalPosition(finalPosition: $finalPosition) {
+    finalPosition
+  }
+}

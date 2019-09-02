@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { FormGroup, H3 } from '@blueprintjs/core'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { get } from 'lodash'
 
 import { NumInput } from 'components/formPrimitives/NumInput'
@@ -9,6 +9,7 @@ import { SaveButton } from 'components/formPrimitives/SaveButton'
 import styles from './styles.css'
 
 import DOZER_QUERY from 'queries/dozer.graphql'
+import EDIT_DOZER_MUTATION from 'mutations/editDozer.graphql'
 
 export const Dozer = () => {
   const [form, setForm] = useState({})
@@ -21,7 +22,11 @@ export const Dozer = () => {
     setForm(dozer)
   }, [data])
 
-  const isLoading = loading
+  const [editDozer, { loading: editLoading }] = useMutation(EDIT_DOZER_MUTATION, {
+    refetchQueries: [{ query: DOZER_QUERY }],
+  })
+
+  const isLoading = loading || editLoading
 
   return (
     <div styleName="wrapper">
@@ -42,7 +47,7 @@ export const Dozer = () => {
           />
         </FormGroup>
       </div>
-      <SaveButton isLoading={isLoading} />
+      <SaveButton isLoading={isLoading} onClick={() => editDozer({ variables: form })} />
     </div>
   )
 }

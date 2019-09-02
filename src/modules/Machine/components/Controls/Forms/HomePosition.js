@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
-import { FormGroup, H3 } from '@blueprintjs/core'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { get } from 'lodash'
+import { FormGroup, H3 } from '@blueprintjs/core'
 
 import { SaveButton } from 'components/formPrimitives/SaveButton'
 import { NumInput } from 'components/formPrimitives/NumInput'
@@ -9,6 +9,7 @@ import { NumInput } from 'components/formPrimitives/NumInput'
 import styles from './styles.css'
 
 import HOME_POSITION_QUERY from 'queries/homePosition.graphql'
+import EDIT_HOME_POSITION_MUTATION from 'mutations/editHomePosition.graphql'
 
 export const HomePosition = () => {
   const [form, setForm] = useState({})
@@ -21,7 +22,11 @@ export const HomePosition = () => {
     setForm(homePosition)
   }, [data])
 
-  const isLoading = loading
+  const [editHomePosition, { loading: editLoading }] = useMutation(EDIT_HOME_POSITION_MUTATION, {
+    refetchQueries: [{ query: HOME_POSITION_QUERY }],
+  })
+
+  const isLoading = loading || editLoading
 
   return (
     <div styleName="wrapper narrow_wrapper">
@@ -37,7 +42,7 @@ export const HomePosition = () => {
           />
         </FormGroup>
       </div>
-      <SaveButton isLoading={isLoading} />
+      <SaveButton isLoading={isLoading} onClick={() => editHomePosition({ variables: form })} />
     </div>
   )
 }
