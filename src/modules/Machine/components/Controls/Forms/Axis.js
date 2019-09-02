@@ -26,6 +26,8 @@ export const Axis = () => {
     refetchQueries: [{ query: AXIS_QUERY }],
   })
 
+  const handleSave = () => editAxis({ variables: form })
+
   const isLoading = loading || editLoading
 
   return (
@@ -61,7 +63,7 @@ export const Axis = () => {
           />
         </FormGroup>
       </div>
-      <SaveButton isLoading={isLoading} onClick={() => editAxis({ variables: form })} />
+      <SaveButton isLoading={isLoading} onClick={handleSave} />
     </div>
   )
 }

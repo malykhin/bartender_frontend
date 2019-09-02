@@ -1,8 +1,9 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { NavLink, withRouter } from 'react-router-dom'
-import { Button } from '@blueprintjs/core'
 import cn from 'classnames'
+
+import { Button } from '@blueprintjs/core'
 
 const Item = ({ route, location }) => (
   <NavLink to={route.path}>

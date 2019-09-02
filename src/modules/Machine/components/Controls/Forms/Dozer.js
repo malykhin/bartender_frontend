@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react'
-import { FormGroup, H3 } from '@blueprintjs/core'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { get } from 'lodash'
+
+import { FormGroup, H3 } from '@blueprintjs/core'
 
 import { NumInput } from 'components/formPrimitives/NumInput'
 import { SaveButton } from 'components/formPrimitives/SaveButton'
@@ -26,6 +27,8 @@ export const Dozer = () => {
     refetchQueries: [{ query: DOZER_QUERY }],
   })
 
+  const handleSave = () => editDozer({ variables: form })
+
   const isLoading = loading || editLoading
 
   return (
@@ -47,7 +50,7 @@ export const Dozer = () => {
           />
         </FormGroup>
       </div>
-      <SaveButton isLoading={isLoading} onClick={() => editDozer({ variables: form })} />
+      <SaveButton isLoading={isLoading} onClick={handleSave} />
     </div>
   )
 }

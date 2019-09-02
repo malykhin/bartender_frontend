@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { isNumber, isString, get } from 'lodash'
 import { useQuery } from '@apollo/react-hooks'
+
 import { Spinner } from '@blueprintjs/core'
 
 import { MachineSchema } from './components/MachineSchema/MachineSchema'

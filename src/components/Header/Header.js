@@ -1,6 +1,8 @@
 import React from 'react'
 import { array } from 'prop-types'
+
 import { Navbar, Alignment } from '@blueprintjs/core'
+
 import NavItem from './NavItem'
 
 const Header = ({ routes }) => (

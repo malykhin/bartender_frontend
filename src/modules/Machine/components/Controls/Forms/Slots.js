@@ -9,10 +9,10 @@ import { NumInput } from 'components/formPrimitives/NumInput'
 import { TextInput } from 'components/formPrimitives/TextInput'
 import { Select } from 'components/formPrimitives/Select'
 
+import styles from './styles.css'
+
 import SLOTS_QUERY from 'queries/slots.graphql'
 import CREATE_SLOT_MUTATION from 'mutations/createSlot.graphql'
-
-import styles from './styles.css'
 
 export const Slots = ({ liquids }) => {
   const [form, setForm] = useState({})
@@ -27,6 +27,7 @@ export const Slots = ({ liquids }) => {
   }
 
   const isLoading = slotLoading
+
   return (
     <div styleName="wrapper">
       <H3 className={styles.header}>Create slot</H3>

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/react-hooks'
 
 import Header from './components/Header/Header'
+
 import routes from './routes'
 import apolloClient from './services/apolloClient'
 

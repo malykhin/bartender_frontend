@@ -1,5 +1,6 @@
 import React from 'react'
 import { get } from 'lodash'
+
 import { useQuery, useMutation } from '@apollo/react-hooks'
 
 import { LiquidCard } from './components/LiquidCard/LiquidCard'
@@ -27,7 +28,10 @@ const Liquids = () => {
     refetchQueries: [{ query: LIQUIDS_QUERY }, { query: LIQUIDS_FOR_SELECT_QUERY }],
   })
 
+  const handleDelete = ({ id }) => deleteLiquid({ variables: { id } })
+
   const isLoading = loading || createLoading || editLoading || deleteLoading
+
   return (
     <div styleName="container">
       {liquids.map((liquid) => (
@@ -35,7 +39,7 @@ const Liquids = () => {
           key={liquid.id}
           liquid={liquid}
           isLoading={isLoading}
-          handleDelete={() => deleteLiquid({ variables: { id: liquid.id } })}
+          handleDelete={handleDelete}
           handleEdit={editLiquid}
         />
       ))}

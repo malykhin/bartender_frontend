@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { object, bool, func } from 'prop-types'
 import cn from 'classnames'
+
 import { Card, H4, Elevation, Button, Text, Intent, Classes } from '@blueprintjs/core'
 
 import { TextInput } from 'components/formPrimitives/TextInput'
@@ -20,6 +21,8 @@ export const LiquidCard = ({ liquid, isCreate, handleDelete, handleEdit, handleC
     handleCreate({ variables: form })
     setForm({})
   }
+
+  const onDelete = () => handleDelete(liquid)
 
   const handleCancel = () => {
     setEditMode(false)
@@ -69,7 +72,7 @@ export const LiquidCard = ({ liquid, isCreate, handleDelete, handleEdit, handleC
               className={cn({ [Classes.SKELETON]: isLoading })}
               icon="trash"
               intent={Intent.DANGER}
-              onClick={handleDelete}
+              onClick={onDelete}
             />
             <Button
               className={cn({ [Classes.SKELETON]: isLoading })}

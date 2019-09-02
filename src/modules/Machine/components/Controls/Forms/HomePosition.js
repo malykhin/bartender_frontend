@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { get } from 'lodash'
+
 import { FormGroup, H3 } from '@blueprintjs/core'
 
 import { SaveButton } from 'components/formPrimitives/SaveButton'
@@ -26,6 +27,8 @@ export const HomePosition = () => {
     refetchQueries: [{ query: HOME_POSITION_QUERY }],
   })
 
+  const handleSave = () => editHomePosition({ variables: form })
+
   const isLoading = loading || editLoading
 
   return (
@@ -42,7 +45,7 @@ export const HomePosition = () => {
           />
         </FormGroup>
       </div>
-      <SaveButton isLoading={isLoading} onClick={() => editHomePosition({ variables: form })} />
+      <SaveButton isLoading={isLoading} onClick={handleSave} />
     </div>
   )
 }

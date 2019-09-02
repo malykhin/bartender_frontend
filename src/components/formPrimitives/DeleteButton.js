@@ -1,8 +1,8 @@
 import React from 'react'
 import { bool } from 'prop-types'
+import cn from 'classnames'
 
 import { Button, Intent, Classes } from '@blueprintjs/core'
-import cn from 'classnames'
 
 import styles from './styles.css'
 

@@ -47,6 +47,8 @@ export const Slot = ({ liquids, id, setDefaultView }) => {
     setDefaultView(null)
   }
 
+  const handleSave = () => editSlot({ variables: form })
+
   const isLoading = deleteLoading || editLoading || loading
 
   return (
@@ -91,7 +93,7 @@ export const Slot = ({ liquids, id, setDefaultView }) => {
       </div>
       <div styleName="footer">
         <DeleteButton isLoading={isLoading} onClick={handleSlotDelete} />
-        <SaveButton isLoading={isLoading} onClick={() => editSlot({ variables: form })} />
+        <SaveButton isLoading={isLoading} onClick={handleSave} />
       </div>
     </div>
   )
