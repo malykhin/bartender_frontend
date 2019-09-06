@@ -16,7 +16,7 @@ import DELETE_LIQUID_MUTATION from 'mutations/deleteLiquid.graphql'
 
 const Liquids = () => {
   const { data, loading } = useQuery(LIQUIDS_QUERY)
-  let liquids = get(data, 'liquids', [])
+  const liquids = get(data, 'liquids', [])
 
   const [createLiquid, { loading: createLoading }] = useMutation(CREATE_LIQUID_MUTATION, {
     refetchQueries: [{ query: LIQUIDS_QUERY }, { query: LIQUIDS_FOR_SELECT_QUERY }],
