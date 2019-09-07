@@ -1,0 +1,7 @@
+mutation CreateRecipe($name: String!, $description: String!) {
+  createRecipe(name: $name, description: $description) {
+    id
+    name
+    description
+  }
+}

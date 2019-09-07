@@ -7,6 +7,8 @@ import { Card, Button, H4, Text, Elevation, Classes, Intent } from '@blueprintjs
 import styles from './RecipeCard.css'
 
 export const RecipeCard = ({ recipe, isLoading, isEditMode, handleDelete, handleEdit }) => {
+  const deleteHandler = () => handleDelete(recipe.id)
+
   return (
     <Card className={cn(styles.card, { 'bp3-interactive': !isEditMode })} elevation={Elevation.TWO}>
       <div>
@@ -19,7 +21,7 @@ export const RecipeCard = ({ recipe, isLoading, isEditMode, handleDelete, handle
             className={cn({ [Classes.SKELETON]: isLoading })}
             icon="trash"
             intent={Intent.DANGER}
-            onClick={handleDelete}
+            onClick={deleteHandler}
           />
           <Button
             className={cn({ [Classes.SKELETON]: isLoading })}

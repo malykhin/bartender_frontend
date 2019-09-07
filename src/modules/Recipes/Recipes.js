@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { get } from 'lodash'
 
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 
 import { Switch } from '@blueprintjs/core'
 
@@ -13,6 +13,9 @@ import './Recipes.css'
 
 import RECIPES_QUERY from 'queries/recipes.graphql'
 
+import CREATE_RECIPE_MUTATION from 'mutations/createRecipe.graphql'
+import DELETE_RECIPE_MUTATION from 'mutations/deleteRecipe.graphql'
+
 const Receipts = () => {
   const [isEditMode, setEditMode] = useState(false)
   const [isDialogOpen, setDialogVisibility] = useState(false)
@@ -21,6 +24,14 @@ const Receipts = () => {
   const { data, loading } = useQuery(RECIPES_QUERY)
   const recipes = get(data, 'recipes', [])
 
+  const [createRecipe, { loading: createLoading }] = useMutation(CREATE_RECIPE_MUTATION, {
+    refetchQueries: [{ query: RECIPES_QUERY }],
+  })
+
+  const [deleteRecipe, { loading: deleteLoading }] = useMutation(DELETE_RECIPE_MUTATION, {
+    refetchQueries: [{ query: RECIPES_QUERY }],
+  })
+
   const handleEditModeChange = () => setEditMode(!isEditMode)
 
   const openEditDialog = (id) => {
@@ -28,16 +39,16 @@ const Receipts = () => {
     setDialogVisibility(true)
   }
 
-  const openCreateDialog = () => {
-    setEditId(null)
-    setDialogVisibility(true)
+  const handleCreate = () => {
+    createRecipe({ variables: { name: 'New receipt', description: 'New receipt' } })
   }
 
   const closeDialog = () => setDialogVisibility(false)
 
-  const handleReceiptDelete = () => {}
+  const handleReceiptDelete = (id) => deleteRecipe({ variables: { id } })
 
-  const isLoading = loading
+  const isLoading = loading || createLoading || deleteLoading
+
   return (
     <>
       <div styleName="controls_panel">
@@ -55,7 +66,7 @@ const Receipts = () => {
             editId={editId}
           />
         ))}
-        {isEditMode && <NewRecipesButton onClick={openCreateDialog} />}
+        {isEditMode && <NewRecipesButton onClick={handleCreate} />}
       </div>
       <RecipeDialog isOpen={isDialogOpen} onClose={closeDialog} />
     </>
