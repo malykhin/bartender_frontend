@@ -3,5 +3,11 @@ query Recipe($recipeId: ID!) {
     id
     name
     description
+    ingredients {
+      id
+      recipeId
+      liquidId
+      volume
+    }
   }
 }

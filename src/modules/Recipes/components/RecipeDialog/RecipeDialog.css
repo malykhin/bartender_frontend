@@ -4,3 +4,11 @@
   justify-content: center;
   padding: 20px 40px;
 }
+
+.add {
+  width: 20px;
+}
+
+.dialog {
+  width: 600px !important;
+}

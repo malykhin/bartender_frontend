@@ -1,0 +1,8 @@
+mutation EditIngredient($id: ID!, $recipeId: ID!, $liquidId: ID!, $volume: Int!) {
+  editIngredient(id: $id, recipeId: $recipeId, liquidId: $liquidId, volume: $volume) {
+    id
+    recipeId
+    liquidId
+    volume
+  }
+}
