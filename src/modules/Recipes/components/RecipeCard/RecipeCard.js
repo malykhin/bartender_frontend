@@ -8,7 +8,7 @@ import styles from './RecipeCard.css'
 
 export const RecipeCard = ({ recipe, isLoading, isEditMode, handleDelete, handleEdit }) => {
   const deleteHandler = () => handleDelete(recipe.id)
-
+  const editHandler = () => handleEdit(recipe.id)
   return (
     <Card className={cn(styles.card, { 'bp3-interactive': !isEditMode })} elevation={Elevation.TWO}>
       <div>
@@ -27,7 +27,7 @@ export const RecipeCard = ({ recipe, isLoading, isEditMode, handleDelete, handle
             className={cn({ [Classes.SKELETON]: isLoading })}
             icon="edit"
             intent={Intent.PRIMARY}
-            onClick={handleEdit}
+            onClick={editHandler}
           />
         </div>
       )}

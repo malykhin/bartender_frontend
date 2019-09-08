@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { get } from 'lodash'
 
 import { useQuery, useMutation } from '@apollo/react-hooks'
 
+import { NewCardButton } from 'components/NewCardButton/NewCardButton'
 import { LiquidCard } from './components/LiquidCard/LiquidCard'
+import { LiquidDialog } from './components/LiquidDialog/LiquidDialog'
 
 import './Liquids.css'
 
@@ -15,6 +17,8 @@ import EDIT_LIQUID_MUTATION from 'mutations/editLiquid.graphql'
 import DELETE_LIQUID_MUTATION from 'mutations/deleteLiquid.graphql'
 
 const Liquids = () => {
+  const [isDialogOpen, setDialogVisibility] = useState(false)
+  const [editId, setEditId] = useState(null)
   const { data, loading } = useQuery(LIQUIDS_QUERY)
   const liquids = get(data, 'liquids', [])
 
@@ -28,6 +32,22 @@ const Liquids = () => {
     refetchQueries: [{ query: LIQUIDS_QUERY }, { query: LIQUIDS_FOR_SELECT_QUERY }],
   })
 
+  const openEditDialog = (id) => {
+    setEditId(id)
+    setDialogVisibility(true)
+  }
+
+  const handleCreate = () => {
+    createLiquid({ variables: { name: 'New liquid', description: 'New liquid' } })
+  }
+
+  const closeDialog = () => setDialogVisibility(false)
+
+  const handleEdit = (liquid) => {
+    editLiquid({ variables: liquid })
+    closeDialog()
+  }
+
   const handleDelete = ({ id }) => deleteLiquid({ variables: { id } })
 
   const isLoading = loading || createLoading || editLoading || deleteLoading
@@ -40,10 +60,11 @@ const Liquids = () => {
           liquid={liquid}
           isLoading={isLoading}
           handleDelete={handleDelete}
-          handleEdit={editLiquid}
+          handleEdit={openEditDialog}
         />
       ))}
-      <LiquidCard isLoading={isLoading} handleCreate={createLiquid} isCreate />
+      <NewCardButton onClick={handleCreate} />
+      {editId && <LiquidDialog isOpen={isDialogOpen} onClose={closeDialog} editId={editId} handleEdit={handleEdit} />}
     </div>
   )
 }

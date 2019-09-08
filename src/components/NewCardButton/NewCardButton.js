@@ -5,14 +5,14 @@ import cn from 'classnames'
 
 import { Card, Icon, Elevation } from '@blueprintjs/core'
 
-import styles from './NewRecipeButton.css'
+import styles from './NewCardButton.css'
 
-export const NewRecipesButton = ({ onClick }) => (
+export const NewCardButton = ({ onClick }) => (
   <Card onClick={onClick} className={cn(styles.card, 'bp3-interactive')} elevation={Elevation.TWO}>
     <Icon icon="plus" iconSize={40} />
   </Card>
 )
 
-NewRecipesButton.propTypes = {
+NewCardButton.propTypes = {
   onClick: func.isRequired,
 }

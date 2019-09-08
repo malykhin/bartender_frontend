@@ -9,17 +9,19 @@ import { Dialog } from '@blueprintjs/core'
 import { TextInput } from 'components/formPrimitives/TextInput'
 import { SaveButton } from 'components/formPrimitives/SaveButton'
 
-import './RecipeDialog.css'
+import './LiquidDialog.css'
 
-import RECIPE_QUERY from 'queries/recipe.graphql'
+import LIQUID_QUERY from 'queries/liquid.graphql'
 
-export const RecipeDialog = ({ isOpen, onClose, editId, handleEdit }) => {
+export const LiquidDialog = ({ isOpen, onClose, editId, handleEdit }) => {
   const [form, setForm] = useState({})
-  const { data, loading } = useQuery(RECIPE_QUERY, { variables: { recipeId: editId } })
-  const recipe = get(data, 'recipe', {})
+
+  const { data, loading } = useQuery(LIQUID_QUERY, { variables: { liquidId: editId } })
+
+  const liquid = get(data, 'liquid', {})
 
   useMemo(() => {
-    setForm(recipe)
+    setForm(liquid)
   }, [data])
 
   const isLoading = loading
@@ -27,7 +29,7 @@ export const RecipeDialog = ({ isOpen, onClose, editId, handleEdit }) => {
   const editHandler = () => handleEdit(form)
 
   return (
-    <Dialog icon="filter" onClose={onClose} title={'Recipe'} isOpen={isOpen}>
+    <Dialog icon="filter" onClose={onClose} title={'Liquid'} isOpen={isOpen}>
       <div styleName="container">
         <TextInput isLoading={isLoading} form={form} onChange={setForm} placeholder="Name" name="name" />
         <TextInput isLoading={isLoading} form={form} onChange={setForm} placeholder="Description" name="description" />
@@ -37,7 +39,7 @@ export const RecipeDialog = ({ isOpen, onClose, editId, handleEdit }) => {
   )
 }
 
-RecipeDialog.propTypes = {
+LiquidDialog.propTypes = {
   isOpen: bool.isRequired,
   onClose: func.isRequired,
   handleEdit: func.isRequired,

@@ -1,0 +1,7 @@
+query Recipe($recipeId: ID!) {
+  recipe(id: $recipeId) {
+    id
+    name
+    description
+  }
+}
