@@ -65,7 +65,7 @@ export const RecipeDialog = ({ isOpen, onClose, editId, handleEdit, liquids }) =
             handleSubmit={handleIngredientEdit}
           />
         ))}
-        <Button onClick={addIngredient} styleName="add" icon="add" minimal />
+        <Button onClick={addIngredient} styleName="add" icon="add" minimal large />
         <SaveButton isLoading={isLoading} onClick={editHandler} />
       </div>
     </Dialog>
