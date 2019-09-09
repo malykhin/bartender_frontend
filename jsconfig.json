@@ -6,6 +6,7 @@
     "paths": {
       "queries/*": ["./src/queries/*"],
       "mutations/*": ["./src/mutations/*"],
+      "subscriptions/*": ["./src/subscriptions/*"],
       "components/*": ["./src/components/*"]
     }
   },
