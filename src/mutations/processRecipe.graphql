@@ -1,0 +1,5 @@
+mutation ProcessRecipe($recipeId: ID!) {
+  processRecipe(recipeId: $recipeId) {
+    id
+  }
+}

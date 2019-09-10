@@ -17,6 +17,7 @@ import LIQUIDS_FOR_SELECT_QUERY from 'queries/liquidsForSelect.graphql'
 import CREATE_RECIPE_MUTATION from 'mutations/createRecipe.graphql'
 import EDIT_RECIPE_MUTATION from 'mutations/editRecipe.graphql'
 import DELETE_RECIPE_MUTATION from 'mutations/deleteRecipe.graphql'
+import PROCESS_RECIPE_MUTATION from 'mutations/processRecipe.graphql'
 
 const Recipes = () => {
   const [isEditMode, setEditMode] = useState(false)
@@ -41,6 +42,8 @@ const Recipes = () => {
     refetchQueries: [{ query: RECIPES_QUERY }],
   })
 
+  const [processRecipe, { loading: processLoading }] = useMutation(PROCESS_RECIPE_MUTATION)
+
   const handleEditModeChange = () => setEditMode(!isEditMode)
 
   const openEditDialog = (id) => {
@@ -61,7 +64,9 @@ const Recipes = () => {
 
   const handleRecipeDelete = (id) => deleteRecipe({ variables: { id } })
 
-  const isLoading = loading || createLoading || editLoading || deleteLoading || liquidsLoading
+  const handleRecipeProcess = (recipeId) => processRecipe({ variables: { recipeId } })
+
+  const isLoading = loading || createLoading || editLoading || deleteLoading || liquidsLoading || processLoading
 
   return (
     <>
@@ -77,6 +82,7 @@ const Recipes = () => {
             isEditMode={isEditMode}
             handleDelete={handleRecipeDelete}
             handleEdit={openEditDialog}
+            onClick={handleRecipeProcess}
           />
         ))}
         {isEditMode && <NewCardButton onClick={handleCreate} />}

@@ -6,11 +6,15 @@ import { Card, Button, H4, Text, Elevation, Classes, Intent } from '@blueprintjs
 
 import styles from './RecipeCard.css'
 
-export const RecipeCard = ({ recipe, isLoading, isEditMode, handleDelete, handleEdit }) => {
+export const RecipeCard = ({ recipe, isLoading, isEditMode, handleDelete, handleEdit, onClick }) => {
   const deleteHandler = () => handleDelete(recipe.id)
   const editHandler = () => handleEdit(recipe.id)
   return (
-    <Card className={cn(styles.card, { 'bp3-interactive': !isEditMode })} elevation={Elevation.TWO}>
+    <Card
+      onClick={() => !isEditMode && onClick(recipe.id)}
+      className={cn(styles.card, { 'bp3-interactive': !isEditMode })}
+      elevation={Elevation.TWO}
+    >
       <div>
         <H4 className={cn({ [Classes.SKELETON]: isLoading })}>{recipe.name}</H4>
         <Text className={cn({ [Classes.SKELETON]: isLoading })}>{recipe.description}</Text>
@@ -40,5 +44,6 @@ RecipeCard.propTypes = {
   isLoading: bool.isRequired,
   handleDelete: func.isRequired,
   handleEdit: func.isRequired,
+  onClick: func.isRequired,
   recipe: object.isRequired,
 }
