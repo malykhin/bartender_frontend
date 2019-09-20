@@ -1,0 +1,7 @@
+query ValidRecipes {
+  validRecipes {
+    id
+    name
+    description
+  }
+}

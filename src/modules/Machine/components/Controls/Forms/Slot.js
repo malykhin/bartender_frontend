@@ -18,6 +18,7 @@ import DELETE_SLOT_MUTATION from 'mutations/deleteSlot.graphql'
 
 import SLOTS_QUERY from 'queries/slots.graphql'
 import SLOT_QUERY from 'queries/slot.graphql'
+import VALID_RECIPES_QUERY from 'queries/validRecipes.graphql'
 
 export const Slot = ({ liquids, id, setDefaultView }) => {
   const [form, setForm] = useState({})
@@ -35,7 +36,7 @@ export const Slot = ({ liquids, id, setDefaultView }) => {
   }, [data])
 
   const [editSlot, { loading: editLoading }] = useMutation(EDIT_SLOT_MUTATION, {
-    refetchQueries: [{ query: SLOT_QUERY, variables: { slotId: id } }],
+    refetchQueries: [{ query: SLOT_QUERY, variables: { slotId: id } }, { query: VALID_RECIPES_QUERY }],
   })
 
   const [deleteSlot, { loading: deleteLoading }] = useMutation(DELETE_SLOT_MUTATION, {
