@@ -10,6 +10,7 @@ module.exports = {
       queries: path.resolve(__dirname, '../../src/queries/'),
       mutations: path.resolve(__dirname, '../../src/mutations/'),
       components: path.resolve(__dirname, '../../src/components/'),
+      constants: path.resolve(__dirname, '../../src/constants/'),
       subscriptions: path.resolve(__dirname, '../../src/subscriptions/'),
     },
   },

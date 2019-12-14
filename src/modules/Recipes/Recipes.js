@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { get } from 'lodash'
 
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation, useSubscription } from '@apollo/react-hooks'
 
-import { Switch, Alert, Intent } from '@blueprintjs/core'
+import { Switch, Alert, Intent, Icon } from '@blueprintjs/core'
 
 import { NewCardButton } from 'components/NewCardButton/NewCardButton'
 import { RecipeCard } from './components/RecipeCard/RecipeCard'
 import { RecipeDialog } from './components/RecipeDialog/RecipeDialog'
+import { BUSY } from 'constants/machineStatuses'
 
 import './Recipes.css'
 
@@ -20,6 +21,9 @@ import EDIT_RECIPE_MUTATION from 'mutations/editRecipe.graphql'
 import DELETE_RECIPE_MUTATION from 'mutations/deleteRecipe.graphql'
 import PROCESS_RECIPE_MUTATION from 'mutations/processRecipe.graphql'
 
+import MACHINE_STATUS_SUBSCRIPTION from 'subscriptions/machineStatus.graphql'
+import GLASS_STATUS_SUBSCRIPTION from 'subscriptions/glassStatus.graphql'
+
 const Recipes = () => {
   const [isEditMode, setEditMode] = useState(false)
   const [isDialogOpen, setDialogVisibility] = useState(false)
@@ -30,9 +34,14 @@ const Recipes = () => {
   const { data: liquidsData, loading: liquidsLoading } = useQuery(LIQUIDS_FOR_SELECT_QUERY)
   const { data: validRecipesData, loading: validRecipesLoading } = useQuery(VALID_RECIPES_QUERY)
 
+  const { data: glassStatusData } = useSubscription(GLASS_STATUS_SUBSCRIPTION)
+  const { data: machineStatusData } = useSubscription(MACHINE_STATUS_SUBSCRIPTION)
+
   const recipes = get(data, 'recipes', [])
   const liquids = get(liquidsData, 'liquids', [])
+  const isGlassInserted = get(glassStatusData, 'glassStatus.isGlassInserted', false)
   const validRecipes = get(validRecipesData, 'validRecipes', [])
+  const machineStatus = get(machineStatusData, 'machineStatus.statusName')
 
   const [createRecipe, { loading: createLoading }] = useMutation(CREATE_RECIPE_MUTATION, {
     refetchQueries: [{ query: RECIPES_QUERY }, { query: VALID_RECIPES_QUERY }],
@@ -47,6 +56,20 @@ const Recipes = () => {
   })
 
   const [processRecipe, { loading: processLoading }] = useMutation(PROCESS_RECIPE_MUTATION)
+
+  const isMachineBusy = machineStatus === BUSY
+
+  const isLoading =
+    loading ||
+    createLoading ||
+    editLoading ||
+    deleteLoading ||
+    liquidsLoading ||
+    processLoading ||
+    validRecipesLoading ||
+    isMachineBusy
+
+  const recipesToUse = isEditMode ? recipes : validRecipes
 
   const handleEditModeChange = () => setEditMode(!isEditMode)
 
@@ -68,7 +91,8 @@ const Recipes = () => {
 
   const handleRecipeDelete = (id) => deleteRecipe({ variables: { id } })
 
-  const handleProcessConfirmation = (recipeId) => setProcessConfirmation({ isOpen: true, recipeId })
+  const handleProcessConfirmation = (recipeId) =>
+    !isLoading && isGlassInserted && setProcessConfirmation({ isOpen: true, recipeId })
 
   const cancelProcessConfirmation = () => setProcessConfirmation({ isOpen: false, recipeId: null })
 
@@ -77,14 +101,17 @@ const Recipes = () => {
     cancelProcessConfirmation()
   }
 
-  const isLoading =
-    loading || createLoading || editLoading || deleteLoading || liquidsLoading || processLoading || validRecipesLoading
-
-  const recipesToUse = isEditMode ? recipes : validRecipes
-
   return (
     <>
       <div styleName="controls_panel">
+        <div styleName="insert_glass_error">
+          {!isGlassInserted && (
+            <>
+              <Icon icon="error" iconSize={20} styleName="space_right" />
+              Please insert glass
+            </>
+          )}
+        </div>
         <Switch label="Edit" large checked={isEditMode} onChange={handleEditModeChange} />
       </div>
       <div styleName="container">
@@ -92,7 +119,7 @@ const Recipes = () => {
           <RecipeCard
             key={recipe.id}
             recipe={recipe}
-            isLoading={isLoading}
+            isLoading={!isEditMode && isLoading}
             isEditMode={isEditMode}
             handleDelete={handleRecipeDelete}
             handleEdit={openEditDialog}
