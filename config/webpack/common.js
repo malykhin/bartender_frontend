@@ -1,6 +1,5 @@
 const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
@@ -67,7 +66,11 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
-    new FaviconsWebpackPlugin('./assets/favicon.ico'),
     new Dotenv(),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
 }
